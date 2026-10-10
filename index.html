@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Nova Store - Discover thoughtfully selected everyday essentials.">
+
+    <title>Nova Store | Better Everyday Living</title>
+
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module" src="app.js"></script>
+</head>
+
+<body>
+
+    <!-- Header and Navigation -->
+    <header class="site-header">
+
+        <a href="#/" class="brand" aria-label="Nova Store Home">
+            <span class="brand-mark">N</span>
+            nova<span class="brand-dot">.</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="#/" data-nav="home">Shop</a>
+            <a href="#/about" data-nav="about">Our Story</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <label class="search-box" aria-label="Search products">
+                <span aria-hidden="true">⌕</span>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    autocomplete="off"
+                >
+            </label>
+
+            <button
+                class="cart-button"
+                id="cartButton"
+                aria-label="View shopping bag"
+            >
+                Bag <span id="cartCount">0</span>
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- Main Website Content -->
+    <main id="app" tabindex="-1">
+
+        <!-- Hero Section -->
+        <section class="hero">
+
+            <div class="hero-copy">
+                <p class="eyebrow">THE EVERYDAY EDIT · 2026</p>
+
+                <h1>
+                    Good things.<br>
+                    <em>Better living.</em>
+                </h1>
+
+                <p class="hero-description">
+                    Thoughtfully picked essentials for your desk,
+                    your downtime, and everywhere in between.
+                </p>
+
+                <a href="#/shop" class="primary-button">
+                    Explore the collection
+                    <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+
+            <div class="hero-art" role="img"
+                 aria-label="Minimal lifestyle product arrangement">
+
+                <div class="hero-circle"></div>
+
+                <img
+                    src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1000&q=80"
+                    alt="Warm, minimal home workspace"
+                    fetchpriority="high"
+                >
+
+                <div class="floating-note">
+                    <span aria-hidden="true">✳</span>
+
+                    <div>
+                        <strong>Small details</strong><br>
+                        make a difference
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Product Catalog -->
+        <section class="catalog-section" id="catalog">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">CURATED FOR YOU</p>
+                    <h2>Find Your Next Favorite</h2>
+                </div>
+
+                <p class="muted" id="resultCount">
+                    Loading collection...
+                </p>
+            </div>
+
+
+            <!-- Category Filters and Sorting -->
+            <div class="catalog-controls">
+
+                <div
+                    class="category-list"
+                    id="categoryList"
+                    aria-label="Filter by category"
+                ></div>
+
+                <label class="sort-control">
+                    Sort by
+
+                    <select id="sortSelect">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </label>
+
+            </div>
+
+
+            <!-- Products will be displayed using JavaScript -->
+            <div
+                class="product-grid"
+                id="productGrid"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- Displayed when no products match -->
+            <div class="empty-state hidden" id="emptyState">
+
+                <span aria-hidden="true">⌕</span>
+
+                <h3>No matches just yet</h3>
+
+                <p>Try another search or category.</p>
+
+                <button class="text-button" id="clearFilters">
+                    Clear filters
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+
+            <div>
+                <p class="eyebrow">A LITTLE NOTE FROM NOVA</p>
+
+                <h2>Good Finds, Occasionally.</h2>
+
+                <p>
+                    Get new arrivals and thoughtful picks in your inbox.
+                </p>
+            </div>
+
+            <form id="newsletterForm" class="newsletter-form">
+
+                <label class="sr-only" for="emailInput">
+                    Email address
+                </label>
+
+                <input
+                    type="email"
+                    id="emailInput"
+                    placeholder="Your email address"
+                    required
+                >
+
+                <button type="submit" class="primary-button">
+                    Join us <span aria-hidden="true">→</span>
+                </button>
+
+            </form>
+
+            <p
+                class="newsletter-message"
+                id="newsletterMessage"
+                role="status"
+            ></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <a href="#/" class="brand">
+            nova<span class="brand-dot">.</span>
+        </a>
+
+        <p>Useful things, chosen with care.</p>
+
+        <span>
+            © 2026 Nova Store · Internship Capstone Project
+        </span>
+
+    </footer>
+
+
+    <!-- Product Details Dialog -->
+    <dialog id="productDialog" class="product-dialog">
+
+        <button
+            class="dialog-close"
+            id="closeProductDialog"
+            aria-label="Close product details"
+        >
+            ×
+        </button>
+
+        <div id="productDetail"></div>
+
+    </dialog>
+
+
+    <!-- Shopping Bag Dialog -->
+    <dialog id="cartDialog" class="cart-dialog">
+
+        <div class="dialog-heading">
+
+            <div>
+                <p class="eyebrow">YOUR PICKS</p>
+                <h2>Your Bag</h2>
+            </div>
+
+            <button
+                class="dialog-close inline-close"
+                id="closeCartDialog"
+                aria-label="Close shopping bag"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- Shopping bag items are added through JavaScript -->
+        <div id="cartItems"></div>
+
+
+        <div class="cart-footer">
+
+            <div>
+                <span>Subtotal</span>
+                <strong id="cartSubtotal">₹0</strong>
+            </div>
+
+            <p>Shipping and taxes calculated at checkout.</p>
+
+            <button
+                id="checkoutButton"
+                class="primary-button full-button"
+            >
+                Continue to checkout
+                <span aria-hidden="true">→</span>
+            </button>
+
+            <p
+                class="checkout-message"
+                id="checkoutMessage"
+                role="status"
+            ></p>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- Notification Message -->
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+</body>
+</html>
